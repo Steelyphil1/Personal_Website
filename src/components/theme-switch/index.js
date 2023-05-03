@@ -1,19 +1,15 @@
 import { FormGroup } from '@mui/material';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useTheme } from '@mui/material/styles';
 import { FormControlLabel, Switch } from '@mui/material';
 
 function ThemeSwitch({ store, setTheme }){
 
     const currentTheme = useTheme();
-    //const theme = localStorage.getItem('theme');
+    const [deviceInfo, setDeviceInfo] = store.useState('deviceInfo');
 
-    useEffect(()=> {
-        console.log('currentTheme in ThemeSwitch: ' , currentTheme);
-    }, []);
-
-    const getOtherTheme = () => {
-        return currentTheme.palette.mode === 'dark' ? 'Light Mode' : 'Dark Mode';
+    const getThemeName = () => {
+        return currentTheme.palette.mode === 'dark' ? 'Dark Mode' : 'Light Mode';
     }
 
     const handleThemeChange = () => {
@@ -26,7 +22,12 @@ function ThemeSwitch({ store, setTheme }){
 
     return(
         <FormGroup>
-            <FormControlLabel control={<Switch defaultChecked/>} label={getOtherTheme()} onClick={handleThemeChange} />
+            {deviceInfo.deviceType === 'Laptop' &&
+                <FormControlLabel control={<Switch defaultChecked/>} label={getThemeName()} onClick={handleThemeChange} />
+            }
+            {(deviceInfo.deviceType === 'Mobile' || deviceInfo.deviceType === 'Tablet') &&
+                <FormControlLabel control={<Switch defaultChecked/>} label={""} onClick={handleThemeChange} />
+            } 
         </FormGroup>
     );
 }

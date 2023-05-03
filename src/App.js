@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { createTheme, styled, ThemeProvider } from '@mui/material/styles';
-import { Box, Paper, Toolbar } from '@mui/material';
+import { Box, Toolbar } from '@mui/material';
 import store from './services/appState';
 import Header from './components/header';
 import SideNavigation from './components/side-navigation';
 import Footer from './components/footer';
 import Home from './pages/home';
+//import Responsive from './components/responsive';
+import { getDeviceTypeInfo } from './helpers/utilities';
 import './App.css';
 
 function App() {
@@ -42,11 +44,16 @@ function App() {
       }
     })
   );
+  const [deviceInfo, setDeviceInfo] = store.useState('deviceInfo');
 
   //Effects
   useEffect(() => {
     document.title = 'Phillip Bay';
   }, []);
+
+  useEffect(()=> {
+    window.addEventListener('resize', handleResize, false);
+  },[]);
 
   //Functions
   const setTheme = (value) => {
@@ -71,6 +78,10 @@ function App() {
     localStorage.setItem('theme', value);
   }
 
+  const handleResize = () => {
+    setDeviceInfo(getDeviceTypeInfo());
+  }
+
   return (
     <ThemeProvider theme={mainTheme}>
       <BrowserRouter>
@@ -81,7 +92,9 @@ function App() {
               <Routes>
                 <Route path="/home" element={<Home store={store}/>}/>
               </Routes>
-              <SideNavigation store={store}></SideNavigation>
+              {deviceInfo.deviceType === "Laptop" &&
+                <SideNavigation store={store}></SideNavigation>
+              }
           </MainBox>
           <Footer store={store}/>
         </Box>

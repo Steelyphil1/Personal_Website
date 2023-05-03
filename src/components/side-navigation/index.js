@@ -1,12 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
 import { Box, Drawer, Toolbar, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 
-import AccountBoxIcon from '@mui/icons-material/AccountBox';
-import CreditCardIcon from '@mui/icons-material/CreditCard';
 import GroupIcon from '@mui/icons-material/Group';
-import KeyIcon from '@mui/icons-material/Key';
 import HomeIcon from '@mui/icons-material/Home';
 import CodeIcon from '@mui/icons-material/Code';
 import WorkIcon from '@mui/icons-material/Work';
@@ -17,12 +14,12 @@ function SideNavigation({ store }){
 
     //Constants
     const SIDEBAR_OPTIONS = [
-        { key: 'home', label: 'Home', icon: <HomeIcon/>},
-        { key: 'codingProjects', label: 'Coding Projects', icon: <CodeIcon/>, link: '/settings/personal-profile' },
-        { key: 'workExperience', label: 'Work Experience', icon: <WorkIcon />, link: '/settings/personal-profile' },
-        { key: 'education', label: 'Education', icon: <SchoolIcon/>, link: '/settings/personal-profile' },
-        { key: 'climbingLog', label: 'Climbing Log', icon: <WebStoriesIcon/>, link: '/settings/billing' },
-        { key: 'contact', label: 'Contact', icon: <GroupIcon />, link: '/settings/personal-profile' }
+        { key: 'home', label: 'Home', icon: <HomeIcon/>, link: '/home'},
+        { key: 'codingProjects', label: 'Coding Projects', icon: <CodeIcon/>, link: '/coding' },
+        { key: 'workExperience', label: 'Work Experience', icon: <WorkIcon />, link: '/experience' },
+        { key: 'education', label: 'Education', icon: <SchoolIcon/>, link: '/education' },
+        { key: 'climbingLog', label: 'Climbing Log', icon: <WebStoriesIcon/>, link: '/climbing' },
+        { key: 'contact', label: 'Contact', icon: <GroupIcon />, link: '/contact' }
     ];
     const DRAWER_WIDTH = '22vw';
     const DRAWER_MIN_WIDTH = '250px';
