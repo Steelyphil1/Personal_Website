@@ -23,4 +23,12 @@ const screenConfig = {
     }
 };
 
+const verbiage = {
+    home: {
+        title: 'Welcome',
+        intro_right: "I am a Software Engineer living in San Francisco California. For the past 13 years I have moved all over the city soaking in as much culture as I can. When I'm not working or coding, my passion in life is rock climbing. Specifically outdoor rock climbing in my favorite place on earth -- Yosemite Valley."
+    }
+}
+
 exports.screenConfig = screenConfig;
+exports.verbiage = verbiage;

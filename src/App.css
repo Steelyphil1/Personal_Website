@@ -1,3 +1,8 @@
 .header-image {
   max-height: 3rem;
 }
+
+.homephoto {
+  max-height: 35rem;
+  max-width: 100%;
+}

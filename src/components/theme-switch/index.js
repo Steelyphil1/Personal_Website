@@ -22,7 +22,7 @@ function ThemeSwitch({ store, setTheme }){
 
     return(
         <FormGroup>
-            {deviceInfo.deviceType === 'Laptop' &&
+            {(deviceInfo.deviceType === 'Laptop' || deviceInfo.deviceType === 'LargerThanLaptop') &&
                 <FormControlLabel control={<Switch defaultChecked/>} label={getThemeName()} onClick={handleThemeChange} />
             }
             {(deviceInfo.deviceType === 'Mobile' || deviceInfo.deviceType === 'Tablet') &&

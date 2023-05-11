@@ -1,29 +1,37 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { AppBar, Box, Button, IconButton, Toolbar } from '@mui/material';
+import { AppBar, Box, Button, IconButton, Menu, MenuItem, Toolbar } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import ThemeSwitch from '../theme-switch';
 import MenuIcon from '@mui/icons-material/Menu';
-import dark_logo from '../../static/images/phillip-bay_dark.png';
-import light_logo from '../../static/images/phillip-bay_light.png';
+import dark_logo from '../../static/images/Phillip_Dark.png';
+import light_logo from '../../static/images/Phillip_Light.png';
 
 function Header({ store, setTheme }){
-    
-    //Constants
-    const navigate = useNavigate();
-    const theme = useTheme();
 
     //States
     const [deviceInfo, setDeviceInfo] = store.useState('deviceInfo');
+    const [menuAnchor, setMenuAnchor] = React.useState(null);
+
+    //Constants
+    const navigate = useNavigate();
+    const theme = useTheme();
+    const open = Boolean(menuAnchor);
 
     //Effects
-    useEffect(()=>{
-        console.log('currentTheme: ' , theme);
-    },[theme]);
+
 
     //Functions
     const toHome = () => {
         navigate(`/`, { replace: true});
+    }
+
+    const menuClick = (event) => {
+        setMenuAnchor(event.currentTarget);
+    }
+
+    const handleClose = () => {
+        setMenuAnchor(null);
     }
 
     return(
@@ -37,9 +45,33 @@ function Header({ store, setTheme }){
                     <Box sx={{ flexGrow: 1 }} />
                     <ThemeSwitch store={store} setTheme={setTheme}/>
                     {(deviceInfo.deviceType === 'Mobile' || deviceInfo.deviceType === 'Tablet') &&
-                        <IconButton>
-                            <MenuIcon/>
-                        </IconButton>
+                        <React.Fragment>
+                            <IconButton id="header-menu" onClick={menuClick}>
+                                <MenuIcon/>
+                            </IconButton>
+                            <Menu
+                            id="header-menu"
+                            aria-labelledby="demo-positioned-button"
+                            anchorEl={menuAnchor}
+                            open={open}
+                            onClose={handleClose}
+                            anchorOrigin={{
+                            vertical: 'top',
+                            horizontal: 'left',
+                            }}
+                            transformOrigin={{
+                            vertical: 'top',
+                            horizontal: 'left',
+                            }}
+                            >
+                                <MenuItem onClick={handleClose}>Home</MenuItem>
+                                <MenuItem onClick={handleClose}>Code</MenuItem>
+                                <MenuItem onClick={handleClose}>Work</MenuItem>
+                                <MenuItem onClick={handleClose}>Education</MenuItem>
+                                <MenuItem onClick={handleClose}>Climbing</MenuItem>
+                                <MenuItem onClick={handleClose}>Contact</MenuItem>
+                            </Menu>
+                        </React.Fragment>
                     }
                 </Toolbar>
             </AppBar>

@@ -3,12 +3,18 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { createTheme, styled, ThemeProvider } from '@mui/material/styles';
 import { Box, Toolbar } from '@mui/material';
 import store from './services/appState';
-import Header from './components/header';
-import SideNavigation from './components/side-navigation';
-import Footer from './components/footer';
-import Home from './pages/home';
-//import Responsive from './components/responsive';
 import { getDeviceTypeInfo } from './helpers/utilities';
+//Component Imports
+import Header from './components/header';
+import Footer from './components/footer';
+//Page Imports
+import Home from './pages/home';
+import Coding from './pages/coding';
+import Work from './pages/work';
+import Education from './pages/education';
+import Climbing from './pages/climbing';
+import Contact from './pages/contact';
+//File Imports
 import './App.css';
 
 function App() {
@@ -38,6 +44,20 @@ function App() {
           fontFamily: [
             'Helvetica'
           ],
+          h3: {
+            fontSize: '3.5rem',
+            '@media (min-width:768px)': {
+              fontSize: '3.5rem'
+            },
+            '@media (min-width:992px)': {
+              fontSize: '5.0rem'
+            },
+            color: '#ffffff'
+          },
+          p: {
+            color: '#ffffff',
+            fontSize: '1.5rem'
+          },
           button: {
               textTransform: 'none'
           }
@@ -55,6 +75,10 @@ function App() {
     window.addEventListener('resize', handleResize, false);
   },[]);
 
+  useEffect(()=> {
+    console.log('deviceInfo: ' , deviceInfo);
+  },[deviceInfo]);
+
   //Functions
   const setTheme = (value) => {
     setMainTheme(
@@ -68,13 +92,26 @@ function App() {
             }
         },
         typography: {
+            h3: {
+                fontSize: '3.5rem',
+              '@media (min-width:768px)': {
+                fontSize: '3.5rem'
+              },
+              '@media (min-width:992px)': {
+                fontSize: '5.0rem'
+              },
+              color: value === 'dark' ? '#ffffff' : '#000000'
+            },
+            p: {
+              color: value === 'dark' ? '#ffffff' : '#000000',
+              fontSize: '1.5rem'
+            },
             button: {
                 textTransform: 'none'
             }
         }
       })
     );
-    console.log('settingTheme with: ' , value);
     localStorage.setItem('theme', value);
   }
 
@@ -90,13 +127,17 @@ function App() {
           <MainBox>
               <Toolbar/>
               <Routes>
-                <Route path="/home" element={<Home store={store}/>}/>
+                <Route path="/" element={<Home store={store}/>}/>
+                <Route path="/coding" element={<Coding store={store}/>}/>
+                <Route path="/work" element={<Work store={store}/>}/>
+                <Route path="/education" element={<Education store={store}/>}/>
+                <Route path="/climbing" element={<Climbing store={store}/>}/>
+                <Route path="/contact" element={<Contact store={store}/>}/>
               </Routes>
-              {deviceInfo.deviceType === "Laptop" &&
-                <SideNavigation store={store}></SideNavigation>
-              }
           </MainBox>
-          <Footer store={store}/>
+          {(deviceInfo.deviceType === 'Mobile' || deviceInfo.deviceType === 'Tablet') &&
+            <Footer store={store}/>
+          } 
         </Box>
       </BrowserRouter>
     </ThemeProvider>
