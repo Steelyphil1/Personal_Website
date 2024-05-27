@@ -75,9 +75,9 @@ function App() {
     window.addEventListener('resize', handleResize, false);
   },[]);
 
-  useEffect(()=> {
-    console.log('deviceInfo: ' , deviceInfo);
-  },[deviceInfo]);
+  // useEffect(()=> {
+  //   console.log('deviceInfo: ' , deviceInfo);
+  // },[deviceInfo]);
 
   //Functions
   const setTheme = (value) => {

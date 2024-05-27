@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Box, Grid, Typography } from '@mui/material';
 import SideNavigation from '../../components/side-navigation';
 import config from '../../config';
 import homephoto from '../../static/images/homephoto.png';
 
 function Home({ store }){
-    const [deviceInfo, setDeviceInfo] = store.useState('deviceInfo');
+    const [deviceInfo, ] = store.useState('deviceInfo');
     return(
         <React.Fragment>
             <Box display="flex">
@@ -17,10 +17,12 @@ function Home({ store }){
                         <Typography variant="h3">{config.verbiage.home.title}</Typography>
                     </Grid>
                     <Grid item direction="column" textAlign="center" lg={6} md={6} xs={12}>
-                        <img src={homephoto} className="homephoto"></img>
+                        <Box sx={{pt: 5}}>
+                            <img src={homephoto} className="homephoto" alt=""></img>
+                        </Box>
                     </Grid>
-                    <Grid item direction="column" textAlign="left" lg={6} md={6} xs={12} sx={{ pb: 20}}>
-                        <Typography variant="p">{config.verbiage.home.intro_right}</Typography>
+                    <Grid item direction="column" textAlign="left" lg={6} md={6} xs={12} sx={{ pb: 20,  pr: 30}}>
+                        <Typography variant="p" sx={{fontSize: {md:'2.5rem', xs:'2rem'}}}>{config.verbiage.home.intro_right}</Typography>
                     </Grid>
                 </Grid>
             </Box>

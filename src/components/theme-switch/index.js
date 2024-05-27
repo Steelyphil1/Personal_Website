@@ -6,7 +6,7 @@ import { FormControlLabel, Switch } from '@mui/material';
 function ThemeSwitch({ store, setTheme }){
 
     const currentTheme = useTheme();
-    const [deviceInfo, setDeviceInfo] = store.useState('deviceInfo');
+    const [deviceInfo, ] = store.useState('deviceInfo');
 
     const getThemeName = () => {
         return currentTheme.palette.mode === 'dark' ? 'Dark Mode' : 'Light Mode';

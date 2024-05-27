@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
-import { Box, Drawer, Grid, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Paper, Toolbar } from '@mui/material';
+import { Box, Drawer, Grid, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Paper, Stack, Toolbar } from '@mui/material';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
@@ -21,7 +21,7 @@ function SideNavigation({ store }){
         { key: 'workExperience', label: 'Work', icon: <WorkIcon />, link: '/work' },
         { key: 'education', label: 'Education', icon: <SchoolIcon/>, link: '/education' },
         { key: 'climbingLog', label: 'Climbing', icon: <WebStoriesIcon/>, link: '/climbing' },
-        { key: 'contact', label: 'Contact', icon: <GroupIcon />, link: '/contact' }
+        //{ key: 'contact', label: 'Contact', icon: <GroupIcon />, link: '/contact' }
     ];
     const DRAWER_WIDTH = '22vw';
     const DRAWER_MIN_WIDTH = '250px';
@@ -40,7 +40,7 @@ function SideNavigation({ store }){
                 }}
             >
                 <Toolbar />
-                <Box sx={{ overflow: 'auto', height: '100%' }}>
+                <Box sx={{ overflow: 'auto', height: '100%', justifyContent: 'space-between', display: 'flex', flexDirection: 'column' }}>
                     <List>
                         {SIDEBAR_OPTIONS.map((option) => (
                             <ListItem sx={{ '&:hover': { color: theme.palette.primary.main }, color: theme.palette.primary.text }} key={option.key} disablePadding component={Link} to={option.link}>
@@ -51,25 +51,19 @@ function SideNavigation({ store }){
                             </ListItem>
                         ))}
                     </List>
-                    <Paper sx={{ bottom: 0, left: 0, right: 0, height: '100px', minHeight: '5vh', maxHeight: '10vh'}} elevation={3} alignItems="center">
-                        <Grid container justifyContent="center" alignItems="center" sx={{ mt: '3vh'}}>
-                            <Grid item xs={1} sx={{ mr: 5}}>
-                                <IconButton href="https://github.com/Steelyphil1?tab=repositories" target="_blank">
-                                    <GitHubIcon fontSize="large"/>
-                                </IconButton>
-                            </Grid>
-                            <Grid item xs={1} sx={{ mr: 5}}>
-                                <IconButton href="https://twitter.com/phillipbay?lang=en" target="_blank">
-                                    <TwitterIcon fontSize="large"/>
-                                </IconButton>
-                            </Grid>
-                            <Grid item xs={1} sx={{ mr: 5}}>
-                                <IconButton href="https://www.linkedin.com/in/phillip-bay-44b10579/" target="_blank">
-                                    <LinkedInIcon fontSize="large"/>
-                                </IconButton>
-                            </Grid>
-                        </Grid>
-                        </Paper>
+                    <Paper sx={{ bottom: 0, left: 0, right: 0 }} elevation={3} alignItems="center" >
+                        <Stack direction="horizontal" gap={1} justifyContent="center" alignItems="center">
+                            <IconButton href="https://github.com/Steelyphil1?tab=repositories" target="_blank">
+                                <GitHubIcon fontSize="large"/>
+                            </IconButton>
+                            <IconButton href="https://twitter.com/phillipbay?lang=en" target="_blank">
+                                <TwitterIcon fontSize="large"/>
+                            </IconButton>
+                            <IconButton href="https://www.linkedin.com/in/phillip-bay-44b10579/" target="_blank">
+                                <LinkedInIcon fontSize="large"/>
+                            </IconButton>
+                        </Stack>  
+                    </Paper>
                 </Box>
             </Drawer>
         </React.Fragment>

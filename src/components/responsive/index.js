@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { getWindowDimension } from '../../helpers/utilities';
 import config from '../../config';
 

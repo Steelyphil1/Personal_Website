@@ -10,7 +10,7 @@ import light_logo from '../../static/images/Phillip_Light.png';
 function Header({ store, setTheme }){
 
     //States
-    const [deviceInfo, setDeviceInfo] = store.useState('deviceInfo');
+    const [deviceInfo, ] = store.useState('deviceInfo');
     const [menuAnchor, setMenuAnchor] = React.useState(null);
 
     //Constants
@@ -30,8 +30,9 @@ function Header({ store, setTheme }){
         setMenuAnchor(event.currentTarget);
     }
 
-    const handleClose = () => {
+    const handleClose = (page) => {
         setMenuAnchor(null);
+        navigate(`/${page}`, { replace: true});
     }
 
     return(
@@ -44,7 +45,7 @@ function Header({ store, setTheme }){
                     </Button>
                     <Box sx={{ flexGrow: 1 }} />
                     <ThemeSwitch store={store} setTheme={setTheme}/>
-                    {(deviceInfo.deviceType === 'Mobile' || deviceInfo.deviceType === 'Tablet') &&
+                    {(deviceInfo.deviceType === 'Mobile' || deviceInfo.deviceType === 'Tablet' ) &&
                         <React.Fragment>
                             <IconButton id="header-menu" onClick={menuClick}>
                                 <MenuIcon/>
@@ -64,12 +65,12 @@ function Header({ store, setTheme }){
                             horizontal: 'left',
                             }}
                             >
-                                <MenuItem onClick={handleClose}>Home</MenuItem>
-                                <MenuItem onClick={handleClose}>Code</MenuItem>
-                                <MenuItem onClick={handleClose}>Work</MenuItem>
-                                <MenuItem onClick={handleClose}>Education</MenuItem>
-                                <MenuItem onClick={handleClose}>Climbing</MenuItem>
-                                <MenuItem onClick={handleClose}>Contact</MenuItem>
+                                <MenuItem onClick={() => {handleClose('')}}>Home</MenuItem>
+                                <MenuItem onClick={() => {handleClose('coding')}}>Coding</MenuItem>
+                                <MenuItem onClick={() => {handleClose('work')}}>Work</MenuItem>
+                                <MenuItem onClick={() => {handleClose('education')}}>Education</MenuItem>
+                                <MenuItem onClick={() => {handleClose('climbing')}}>Climbing</MenuItem>
+                                {/* <MenuItem onClick={() => {handleClose('contact')}}>Contact</MenuItem> */}
                             </Menu>
                         </React.Fragment>
                     }

@@ -1,5 +1,5 @@
-import React, { useEffect, useState} from 'react';
-import { Button, Box, Grid, IconButton, Paper, Typography } from '@mui/material';
+import React from 'react';
+import { Grid, IconButton, Paper } from '@mui/material';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
@@ -8,7 +8,6 @@ function Footer({ store }){
     //Constants
 
     //States
-    const [deviceInfo, setDeviceInfo] = store.useState('deviceInfo');
 
     //Effects
 
